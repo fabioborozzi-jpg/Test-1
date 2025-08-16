@@ -105,3 +105,9 @@ export default function TranslationExerciseA1(){
     </div>
   )
 }
+
+
+// Fix placeholder
+export function getTranslationItems() {
+  return [];
+}

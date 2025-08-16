@@ -31,3 +31,15 @@ export async function saveProgress(progress: Progress, useMock = true): Promise<
   const { error } = await supabase.from('progress').upsert(payload);
   return !error;
 }
+
+
+// Fix placeholder
+export function getEMA() {
+  return 0;
+}
+
+
+// Fix placeholder
+export function updateEMA(value) {
+  return value;
+}
