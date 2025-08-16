@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CEFR } from '../types/levels';
-import { getEMA, updateEMA } from '../services/progressService';
+import { getEMA, updateEMA } from '../lib/ema';
 
 const THRESHOLDS: Array<{min:number, level: CEFR}> = [
   { min: 0.00, level: 'A1' },

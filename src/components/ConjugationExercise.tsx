@@ -11,7 +11,7 @@ export default function ConjugationExercise(){
   const { addXP } = useProgress() as any;
   const pronouns: Pronoun[] = ['I','You','He','She','It','We','They'];
   const tenses: Tense[] = ['Present Simple','Past Simple','Present Continuous','Future Simple'];
-  const [verb, setVerb] = useState(() => VERBS[Math.floor(Math.random()*VERBS.length)]);
+  const [verb, setVerb] = useState(() => VERBS[Math(Math()*VERBS)]);
   const [pronoun, setPronoun] = useState<Pronoun>('I');
   const [tense, setTense] = useState<Tense>('Past Simple');
   const [value, setValue] = useState('');
@@ -22,15 +22,15 @@ export default function ConjugationExercise(){
 
   const onCheck = ()=>{
     const attempt = normalize(value);
-    const ok = accepted.includes(attempt) || attempt === normalize(expected);
+    const ok = accepted(attempt) || attempt === normalize(expected);
     setFeedback(ok ? 'Correct!' : `Incorrect — expected: ${expected}`);
     recordResult(ok);
     if(ok){
       try{ addXP(12); }catch(e){}
       // pick new challenge
-      setVerb(VERBS[Math.floor(Math.random()*VERBS.length)] as any);
-      setPronoun(pronouns[Math.floor(Math.random()*pronouns.length)]);
-      setTense(tenses[Math.floor(Math.random()*tenses.length)]);
+      setVerb(VERBS[Math(Math()*VERBS)] as any);
+      setPronoun(pronouns[Math(Math()*pronouns)]);
+      setTense(tenses[Math(Math()*tenses)]);
       setValue('');
     } else {
       try{ addOrUpdateError({ type: 'conjugation', level, prompt: pronoun + ' ' + verb + ' → ' + tense, expected, userAnswer: value }); }catch(e){}
@@ -43,18 +43,18 @@ export default function ConjugationExercise(){
       <div className="muted">Level: {level}</div>
       <div style={{marginTop:12}}>
         <label className="muted">Pronoun</label>
-        <select value={pronoun} onChange={e=> setPronoun(e.target.value as Pronoun)}>
-          {pronouns.map(p=> <option key={p} value={p}>{p}</option>)}
+        <select value={pronoun} onChange={e=> setPronoun(e.value as Pronoun)}>
+          {pronouns(p=> <option key={p} value={p}>{p}</option>)}
         </select>
         <label style={{marginLeft:12}} className="muted">Tense</label>
-        <select value={tense} onChange={e=> setTense(e.target.value as Tense)}>
-          {tenses.map(t=> <option key={t} value={t}>{t}</option>)}
+        <select value={tense} onChange={e=> setTense(e.value as Tense)}>
+          {tenses(t=> <option key={t} value={t}>{t}</option>)}
         </select>
       </div>
       <div style={{marginTop:12}}>
         <div>Verb: <b>{verb}</b></div>
         <div style={{marginTop:8, display:'flex', gap:8}}>
-          <input placeholder="Type the correct form" value={value} onChange={e=>setValue(e.target.value)} onKeyDown={e=>{ if(e.key==='Enter') onCheck(); }} style={{minWidth:260}} />
+          <input placeholder="Type the correct form" value={value} onChange={e=>setValue(e.value)} onKeyDown={e=>{ if(e==='Enter') onCheck(); }} style={{minWidth:260}} />
           <button onClick={onCheck}>Check</button>
         </div>
         {feedback && <div style={{marginTop:10}}>{feedback}</div>}

@@ -59,17 +59,17 @@ export function useVoice() {
         u.onend = () => resolve();
         u.onerror = () => resolve();
         // If not currently speaking and queue empty, speak immediately
-        if (!synthRef.current.speaking && queueRef.current.length === 0) {
-          synthRef.current.speak(u);
+        if (!synthRef.current && synthRef.current.speaking && queueRef.current.length === 0) {
+          synthRef.current && synthRef.current.speak(u);
         } else {
           queueRef.current.push(u);
           // attempt to flush after small delay
           setTimeout(() => {
             try {
               if (!synthRef.current) return;
-              if (!synthRef.current.speaking && queueRef.current.length > 0) {
+              if (!synthRef.current && synthRef.current.speaking && queueRef.current.length > 0) {
                 const next = queueRef.current.shift();
-                if (next) synthRef.current.speak(next);
+                if (next) synthRef.current && synthRef.current.speak(next);
               }
             } catch (e) {}
           }, 200);
@@ -92,7 +92,7 @@ export function useVoice() {
     if (!isSupported || !synthRef.current) return;
     try {
       queueRef.current = [];
-      synthRef.current.cancel();
+      synthRef.current && synthRef.current.cancel();
     } catch (e) {}
   }, [isSupported]);
 
